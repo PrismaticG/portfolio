@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from "react-router-dom";
 import { FiHome, FiFilm, FiInfo, FiPlay, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FaDiscord } from "react-icons/fa";
+
 
 const videos = [
   { title: "TbhHonest SHORT", url: "https://www.youtube.com/embed/jWyxWQcPRy0" },
@@ -104,6 +106,10 @@ const About = () => (
         Professional video editor specializing in dynamic gameplay edits and cinematic storytelling.
         With 5+ years of experience creating engaging content for gaming creators and esports organizations.
       </p>
+		<div className="flex items-center gap-3 text-lg text-gray-300 mt-4">
+        <FaDiscord size={24} className="text-cyan-400" />
+        <span className="font-medium">Discord: athernals</span>
+      </div>
     </div>
   </motion.div>
 );
