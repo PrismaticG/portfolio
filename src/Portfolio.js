@@ -148,7 +148,8 @@ const About = () => (
       <div className="flex flex-col items-center gap-3 text-lg text-gray-300 mt-4">
         <div className="flex items-center gap-2">
           <FaDiscord size={24} className="text-cyan-400" />
-          <span className="font-medium" className="text-cyan-400 hover:underline">athernals </span>
+        <span className="font-medium text-cyan-400 hover:underline">athernals</span>
+
         </div>
         <div className="flex items-center gap-2">
           <FaSquareXTwitter size={24} className="text-cyan-400" />
