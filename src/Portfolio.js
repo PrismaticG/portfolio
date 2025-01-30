@@ -5,6 +5,7 @@ import { FiHome, FiFilm, FiInfo, FiPlay, FiX, FiChevronLeft, FiChevronRight } fr
 import { FaDiscord } from "react-icons/fa";
 
 
+
 const videos = [
   { title: "TbhHonest SHORT", url: "https://www.youtube.com/embed/jWyxWQcPRy0" },
   { title: "GAMBLING CONTENT", url: "https://www.youtube.com/embed/AqgEdVy4niM" },
@@ -64,32 +65,68 @@ const NavLink = ({ to, icon, label, isActive, isExpanded }) => (
   </Link>
 );
 
-const VideoGallery = () => (
-   <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl p-8 mx-auto"  initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-    {videos.map((video, index) => (
-      <motion.div 
-        key={index} 
-        initial={{ scale: 0.95, opacity: 0 }} 
-        animate={{ scale: 1, opacity: 1 }} 
-        transition={{ delay: index * 0.05 }} 
-        className="group relative overflow-hidden rounded-xl bg-black shadow-2xl"
-      >
-        <div className="relative w-full pt-[56.25%]">
-          <iframe 
-            className="absolute top-0 left-0 w-full h-full"
-            src={video.url}
-            title={video.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-          <h3 className="text-white text-lg font-medium">{video.title}</h3>
-        </div>
-      </motion.div>
-    ))}
-  </motion.div>
-);
+const VideoGallery = () => {
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState(null);
+
+  return (
+    <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl p-8 mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      {videos.map((video, index) => (
+        <motion.div 
+          key={index} 
+          initial={{ scale: 0.95, opacity: 0 }} 
+          animate={{ scale: 1, opacity: 1 }} 
+          transition={{ delay: index * 0.05 }} 
+          className="group relative overflow-hidden rounded-xl bg-black shadow-2xl cursor-pointer"
+          onClick={() => setSelectedVideoIndex(index)}
+        >
+          <div className="relative w-full pt-[56.25%]">
+            <iframe 
+              className="absolute top-0 left-0 w-full h-full pointer-events-none"
+              src={video.url}
+              title={video.title}
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </motion.div>
+      ))}
+
+      <AnimatePresence>
+        {selectedVideoIndex !== null && (
+          <motion.div
+            className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="relative w-full max-w-6xl mx-4">
+              <button 
+                className="absolute -top-12 right-0 text-white hover:text-cyan-400 z-50" 
+                onClick={() => setSelectedVideoIndex(null)}
+              >
+                <FiX size={32} />
+              </button>
+              
+              <motion.div
+                className="relative aspect-video bg-black rounded-xl overflow-hidden shadow-2xl"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+              >
+                <iframe
+                  className="w-full h-full"
+                  src={`${videos[selectedVideoIndex].url}?autoplay=1&mute=0`}
+                  title={videos[selectedVideoIndex].title}
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 const About = () => (
   <motion.div className="w-full max-w-4xl p-8 space-y-8 text-center mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
