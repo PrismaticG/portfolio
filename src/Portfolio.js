@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from "react-router-dom";
 import { FiHome, FiFilm, FiInfo, FiPlay, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { FaDiscord } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { BiLogoGmail } from "react-icons/bi";
 
 
 
@@ -143,9 +145,19 @@ const About = () => (
         Professional video editor specializing in dynamic gameplay edits and cinematic storytelling.
         With 5+ years of experience creating engaging content for gaming creators and esports organizations.
       </p>
-		<div className="flex items-center gap-3 text-lg text-gray-300 mt-4">
-        <FaDiscord size={24} className="text-cyan-400" />
-        <span className="font-medium">Discord: athernals</span>
+      <div className="flex flex-col items-center gap-3 text-lg text-gray-300 mt-4">
+        <div className="flex items-center gap-2">
+          <FaDiscord size={24} className="text-cyan-400" />
+          <span className="font-medium" className="text-cyan-400 hover:underline">athernals </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <FaSquareXTwitter size={24} className="text-cyan-400" />
+          <a href="https://x.com/athernalz" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">@athernalz</a>
+        </div>
+        <div className="flex items-center gap-2">
+          <BiLogoGmail size={24} className="text-cyan-400" />
+          <a href="mailto:sathernals@gmail.com" className="text-cyan-400 hover:underline">sathernals@gmail.com</a>
+        </div>
       </div>
     </div>
   </motion.div>
@@ -214,9 +226,9 @@ const ShowreelModal = ({ isOpen, closeModal }) => {
   );
 };
 
-const Home = ({ openShowreel }) => (
+const Home = () => (
   <motion.div className="w-full h-screen flex flex-col justify-center items-center text-center p-8">
-    <div className="relative z-10 space-y-8 w-full max-w-3xl"> {/* Added max-width */}
+    <div className="relative z-10 space-y-8 w-full max-w-3xl">
       <motion.h1 
         className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
         initial={{ letterSpacing: "0em" }}
@@ -224,15 +236,18 @@ const Home = ({ openShowreel }) => (
       >
         CINEMATIC STORYTELLING
       </motion.h1>
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-semibold shadow-xl hover:shadow-2xl flex items-center gap-2 mx-auto"
-        onClick={openShowreel}
-      >
-        <FiPlay size={24} />
-        Watch Showreel
-      </motion.button>
+      <div className="mt-4">
+        <Link to="/videos">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-semibold shadow-xl hover:shadow-2xl flex items-center gap-2 mx-auto"
+          >
+            <FiPlay size={24} />
+            Watch Showreel
+          </motion.button>
+        </Link>
+      </div>
     </div>
   </motion.div>
 );
